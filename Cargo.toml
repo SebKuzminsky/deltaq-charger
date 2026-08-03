@@ -3,6 +3,13 @@ name = "charger"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "charger"
+path = "src/main.rs"
+
 [features]
 default = [ "std" ]
 std = []
