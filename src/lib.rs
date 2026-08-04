@@ -32,7 +32,7 @@ pub async fn send_command(
     let raw_frame = tokio_socketcan::CANFrame::new(id, frame.raw(), false, false)?;
     can_socket_tx.write_frame(raw_frame)?.await?;
 
-    let batt_charge_cycle_time = if current == 0.0 {
+    let batt_charge_cycle_type = if current == 0.0 {
         DeltaQRpdo10x20aBattChargeCycleType::NoActiveCycle
     } else {
         DeltaQRpdo10x20aBattChargeCycleType::Charge
@@ -46,7 +46,7 @@ pub async fn send_command(
 
     let frame = DeltaQRpdo10x20a::new(
         soc,
-        batt_charge_cycle_time.into(),
+        batt_charge_cycle_type.into(),
         volts,
         current,
         battery_status.into(),
