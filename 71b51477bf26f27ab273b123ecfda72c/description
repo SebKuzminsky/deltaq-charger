@@ -1,0 +1,8 @@
+xv3300 can be "disabled" by SDO 0x2032.00
+
+That's the "CAN Listen Only" SDO.
+
+Writing 1 makes it not emit any CAN packets, which makes the Vartas stop
+trying to charge.
+
+Writing 0 makes it behave normally, and the Vartas try to charge.
