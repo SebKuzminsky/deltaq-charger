@@ -43,7 +43,7 @@ async fn main() -> Result<(), eyre::Report> {
                 println!();
                 println!("Goodbye!");
                 // Shut down the charger.
-                let _ = charger::send_command(&can_socket_tx, 0.0, 0.0, args.temperature, args.soc).await;
+                let _ = deltaq_icl1500::send_command(&can_socket_tx, 0.0, 0.0, args.temperature, args.soc).await;
                 break;
             }
 
@@ -56,7 +56,7 @@ async fn main() -> Result<(), eyre::Report> {
                 }
             }
             _ = &mut timeout => {
-                let _ = charger::send_command(&can_socket_tx, args.volts, args.amps, args.temperature, args.soc).await;
+                let _ = deltaq_icl1500::send_command(&can_socket_tx, args.volts, args.amps, args.temperature, args.soc).await;
                 timeout.set(tokio::time::sleep(tokio::time::Duration::from_secs(1)));
             }
         }

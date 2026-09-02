@@ -2,13 +2,18 @@ use embedded_can::Frame;
 
 #[rustfmt::skip]
 #[allow(clippy::too_many_arguments)]
-pub mod delta_q_can_messages;
+mod deltaq_icl1500_can_messages {
+    include!(concat!(
+        env!("OUT_DIR"),
+        "/deltaq_icl1500_can_messages.rs"
+    ));
+}
 
-pub use delta_q_can_messages::CanError;
-pub use delta_q_can_messages::DeltaQRpdo10x20a;
-pub use delta_q_can_messages::DeltaQRpdo10x20aBattChargeCycleType;
-pub use delta_q_can_messages::DeltaQRpdo10x20aBatteryStatus;
-pub use delta_q_can_messages::DeltaQRpdo20x30a;
+pub use deltaq_icl1500_can_messages::CanError;
+pub use deltaq_icl1500_can_messages::DeltaQRpdo10x20a;
+pub use deltaq_icl1500_can_messages::DeltaQRpdo10x20aBattChargeCycleType;
+pub use deltaq_icl1500_can_messages::DeltaQRpdo10x20aBatteryStatus;
+pub use deltaq_icl1500_can_messages::DeltaQRpdo20x30a;
 
 /// Send a charge command to the Delta-Q charger.
 ///

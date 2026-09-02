@@ -1,0 +1,20 @@
+[package]
+name = "deltaq-icl1500"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+path = "src/lib.rs"
+
+[features]
+default = [ "std" ]
+std = []
+
+[build-dependencies]
+anyhow = "1.0"
+dbc-codegen = { git = "https://github.com/oxibus/dbc-codegen.git" }
+
+[dependencies]
+bitvec = "1.0.1"
+embedded-can = "0.4.1"
+tokio-socketcan = "0.3.1"
