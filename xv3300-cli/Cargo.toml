@@ -1,0 +1,13 @@
+[package]
+name = "xv3300-cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.36", features = ["derive"] }
+deltaq-xv3300 = { version = "0.1.0", path = "../deltaq-xv3300" }
+eyre = "0.6.12"
+tokio = { version = "1.44.2", features = ["macros", "rt", "rt-multi-thread", "sync", "time"] }
+
+# This needs to match deltaq-xv3300's zencan-client...
+zencan-client = { git = "https://github.com/mcbridejc/zencan.git", branch = "main", features = ["socketcan"] }
