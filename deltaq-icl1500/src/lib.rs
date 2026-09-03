@@ -49,13 +49,7 @@ pub async fn send_command(
         DeltaQRpdo10x20aBatteryStatus::Enabled
     };
 
-    let frame = DeltaQRpdo10x20a::new(
-        soc,
-        batt_charge_cycle_type.into(),
-        volts,
-        current,
-        battery_status.into(),
-    )?;
+    let frame = DeltaQRpdo10x20a::new(soc, batt_charge_cycle_type, volts, current, battery_status)?;
     let id: u32 = match frame.id() {
         embedded_can::Id::Standard(standard_id) => standard_id.as_raw() as u32,
         embedded_can::Id::Extended(extended_id) => extended_id.as_raw(),

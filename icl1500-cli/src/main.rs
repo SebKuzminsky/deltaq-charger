@@ -48,13 +48,12 @@ async fn main() -> Result<(), eyre::Report> {
             }
 
             maybe_frame = can_socket_rx.next() => {
-                match maybe_frame {
-                    Some(Ok(_frame)) => {
-                        // let _ = handle_can_frame(frame);
-                    }
-                    _ => ()
+                if let Some(Ok(_frame)) =  maybe_frame {
+                    // Nothing to do.
+                    // let _ = handle_can_frame(frame);
                 }
             }
+
             _ = &mut timeout => {
                 let _ = deltaq_icl1500::send_command(&can_socket_tx, args.volts, args.amps, args.temperature, args.soc).await;
                 timeout.set(tokio::time::sleep(tokio::time::Duration::from_secs(1)));
