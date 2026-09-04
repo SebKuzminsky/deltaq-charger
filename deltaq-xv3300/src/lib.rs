@@ -66,3 +66,23 @@ pub async fn get_ac_current_limit(
     let ac_current_limit = deltaq_xv3300_sdos::ACCurrentLimit0x2202::new(sdo_client).await?;
     Ok(ac_current_limit.value as f32 / 256.0)
 }
+
+pub async fn get_dc_current(
+    sdo_client: &mut zencan_client::SdoClient<
+        zencan_client::common::SocketCanSender,
+        zencan_client::common::SocketCanReceiver,
+    >,
+) -> Result<f32, zencan_client::SdoClientError> {
+    let dc_current = deltaq_xv3300_sdos::ChargingCurrent0x2002::new(sdo_client).await?;
+    Ok(dc_current.value as f32 / 256.0)
+}
+
+pub async fn get_temperature(
+    sdo_client: &mut zencan_client::SdoClient<
+        zencan_client::common::SocketCanSender,
+        zencan_client::common::SocketCanReceiver,
+    >,
+) -> Result<i8, zencan_client::SdoClientError> {
+    let temperature_c = deltaq_xv3300_sdos::ChargerTemperature0x2050::new(sdo_client).await?;
+    Ok(temperature_c.value)
+}

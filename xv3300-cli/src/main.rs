@@ -21,9 +21,17 @@ enum Commands {
 
     #[command()]
     AcCurrentLimit {
-        /// Get or set XV3300 "AC Current Limit" setting.
+        /// Get or set XV3300 "AC Current Limit" setting in Amperes.
         set: Option<f32>,
     },
+
+    #[command()]
+    /// Get XV3300 "DC Current" measurement in Amperes.
+    DcCurrent {},
+
+    #[command()]
+    /// Get XV3300 "Charger Temperature" measurement in degrees C.
+    Temperature {},
 }
 
 #[tokio::main]
@@ -48,6 +56,14 @@ async fn main() -> Result<(), eyre::Report> {
         Commands::AcCurrentLimit { set: None } => {
             let ac_current_limit = deltaq_xv3300::get_ac_current_limit(&mut sdo_client).await?;
             println!("AC Current Limit: {ac_current_limit:.3} A");
+        }
+        Commands::DcCurrent {} => {
+            let dc_current = deltaq_xv3300::get_dc_current(&mut sdo_client).await?;
+            println!("DC Current: {dc_current:.3} A");
+        }
+        Commands::Temperature {} => {
+            let temp_c = deltaq_xv3300::get_temperature(&mut sdo_client).await?;
+            println!("Charger Temperature: {temp_c} °C");
         }
     }
 
