@@ -86,3 +86,13 @@ pub async fn get_temperature(
     let temperature_c = deltaq_xv3300_sdos::ChargerTemperature0x2050::new(sdo_client).await?;
     Ok(temperature_c.value)
 }
+
+pub async fn get_fan_speed(
+    sdo_client: &mut zencan_client::SdoClient<
+        zencan_client::common::SocketCanSender,
+        zencan_client::common::SocketCanReceiver,
+    >,
+) -> Result<u16, zencan_client::SdoClientError> {
+    let fan_speed_rpm = deltaq_xv3300_sdos::FanSpeed0x2031::new(sdo_client).await?;
+    Ok(fan_speed_rpm.value)
+}

@@ -32,6 +32,10 @@ enum Commands {
     #[command()]
     /// Get XV3300 "Charger Temperature" measurement in degrees C.
     Temperature {},
+
+    #[command()]
+    /// Get XV3300 "Fan Speed" measurement in RPM.
+    FanSpeed {},
 }
 
 #[tokio::main]
@@ -64,6 +68,10 @@ async fn main() -> Result<(), eyre::Report> {
         Commands::Temperature {} => {
             let temp_c = deltaq_xv3300::get_temperature(&mut sdo_client).await?;
             println!("Charger Temperature: {temp_c} °C");
+        }
+        Commands::FanSpeed {} => {
+            let fan_speed_rpm = deltaq_xv3300::get_fan_speed(&mut sdo_client).await?;
+            println!("Fan Speed: {fan_speed_rpm} RPM");
         }
     }
 
