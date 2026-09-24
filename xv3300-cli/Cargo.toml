@@ -10,4 +10,4 @@ eyre = "0.6.12"
 tokio = { version = "1.44.2", features = ["macros", "rt", "rt-multi-thread", "sync", "time"] }
 
 # This needs to match deltaq-xv3300's zencan-client...
-zencan-client = { git = "https://github.com/mcbridejc/zencan.git", branch = "main", features = ["socketcan"] }
+zencan-client = { git = "https://github.com/mcbridejc/zencan.git", rev="c8eb8f44548cd5515496fa0e385083a839674c14", features = ["socketcan"] }
